@@ -1,0 +1,414 @@
+{
+    "formatName": "Carousel Post Creation",
+    "description": "A four-step format to create a carousel post with titles, texts, and images.",
+    "metadata": {
+      "thumbnail": "https://example.com/thumbnail.jpg",
+      "videoTutorial": "https://www.youtube.com/watch?v=example123",
+      "postType": "carousel",
+      "aspectRatio": "4:5"
+    },
+    "steps": [
+      {
+        "id": 1,
+        "name": "Step 1: Input News",
+        "description": "Input news text that will be analyzed to generate content.",
+        "instructions": "Enter the news content in markdown format for analysis.",
+        "inputs": [
+          {
+            "type": "textarea",
+            "name": "newsText",
+            "label": "News Content",
+            "placeholder": "Enter news in markdown format",
+            "validation": {
+              "required": true,
+              "minLength": 20
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "type": "textarea",
+            "name": "analysis",
+            "label": "Analysis Result",
+            "source": "generated from backend"
+          }
+        ],
+        "actions": [
+          {
+            "type": "action",
+            "name": "analyze",
+            "label": "Analyze News",
+            "backendAction": "/workflows/mvp-car-step01-analysis.json",
+            "method": "POST",
+            "expectedResponse": {
+              "status": "success",
+              "data": {
+                "analysis": "Markdown analysis output"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Step 2: Generate Post Texts",
+        "description": "Generate titles, texts, captions, and image descriptions from the analysis.",
+        "instructions": "Review the generated post texts.",
+        "inputs": [
+          {
+            "type": "textarea",
+            "name": "analysis",
+            "label": "Analysis",
+            "source": "step1.outputs.analysis"
+          }
+        ],
+        "outputs": [
+          {
+            "type": "textarea",
+            "name": "title",
+            "label": "Generated Title",
+            "source": "generated from backend"
+          },
+          {
+            "type": "textarea",
+            "name": "subtitle",
+            "label": "Generated Subtitle",
+            "source": "generated from backend"
+          },
+          {
+            "type": "textarea",
+            "name": "text01",
+            "label": "Generated Text 01",
+            "source": "generated from backend"
+          },
+          {
+            "type": "textarea",
+            "name": "text02",
+            "label": "Generated Text 02",
+            "source": "generated from backend"
+          },
+          {
+            "type": "textarea",
+            "name": "text03",
+            "label": "Generated Text 03",
+            "source": "generated from backend"
+          },
+          {
+            "type": "textarea",
+            "name": "callToAction",
+            "label": "Call to Action",
+            "source": "generated from backend"
+          },
+          {
+            "type": "textarea",
+            "name": "postCaption",
+            "label": "Post Caption",
+            "source": "generated from backend"
+          },
+          {
+            "type": "textarea",
+            "name": "imageDescription01",
+            "label": "Image Description 01",
+            "source": "generated from backend"
+          },
+          {
+            "type": "textarea",
+            "name": "imageDescription02",
+            "label": "Image Description 02",
+            "source": "generated from backend"
+          },
+          {
+            "type": "textarea",
+            "name": "imageDescription03",
+            "label": "Image Description 03",
+            "source": "generated from backend"
+          }
+        ],
+        "actions": [
+          {
+            "type": "action",
+            "name": "generateTexts",
+            "label": "Generate Post Texts",
+            "backendAction": "/workflows/mvp-car-step02-generatetexts.json",
+            "method": "POST",
+            "expectedResponse": {
+              "status": "success",
+              "data": {
+                "title": "Generated title",
+                "subtitle": "Generated subtitle",
+                "text01": "Generated text 01",
+                "text02": "Generated text 02",
+                "text03": "Generated text 03",
+                "callToAction": "Generated call to action",
+                "postCaption": "Generated post caption",
+                "imageDescription01": "Generated description for image 01",
+                "imageDescription02": "Generated description for image 02",
+                "imageDescription03": "Generated description for image 03"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Step 3: Generate or Choose Images",
+        "description": "Generate images based on the post texts or choose images from the library.",
+        "instructions": "Choose or generate images for the post.",
+        "inputs": [
+          {
+            "type": "textarea",
+            "name": "title",
+            "label": "Title",
+            "source": "step2.outputs.title"
+          },
+          {
+            "type": "textarea",
+            "name": "subtitle",
+            "label": "Subtitle",
+            "source": "step2.outputs.subtitle"
+          },
+          {
+            "type": "textarea",
+            "name": "text01",
+            "label": "Text 01",
+            "source": "step2.outputs.text01"
+          },
+          {
+            "type": "textarea",
+            "name": "text02",
+            "label": "Text 02",
+            "source": "step2.outputs.text02"
+          },
+          {
+            "type": "textarea",
+            "name": "text03",
+            "label": "Text 03",
+            "source": "step2.outputs.text03"
+          },
+          {
+            "type": "textarea",
+            "name": "callToAction",
+            "label": "Call to Action",
+            "source": "step2.outputs.callToAction"
+          },
+          {
+            "type": "textarea",
+            "name": "postCaption",
+            "label": "Post Caption",
+            "source": "step2.outputs.postCaption"
+          },
+          {
+            "type": "textarea",
+            "name": "imageDescription01",
+            "label": "Image Description 01",
+            "source": "step2.outputs.imageDescription01"
+          },
+          {
+            "type": "textarea",
+            "name": "imageDescription02",
+            "label": "Image Description 02",
+            "source": "step2.outputs.imageDescription02"
+          },
+          {
+            "type": "textarea",
+            "name": "imageDescription03",
+            "label": "Image Description 03",
+            "source": "step2.outputs.imageDescription03"
+          }
+        ],
+        "outputs": [
+          {
+            "type": "image",
+            "name": "image01path",
+            "label": "Generated Image 01 Path",
+            "source": "generated from backend"
+          },
+          {
+            "type": "image",
+            "name": "image02path",
+            "label": "Generated Image 02 Path",
+            "source": "generated from backend"
+          },
+          {
+            "type": "image",
+            "name": "image03path",
+            "label": "Generated Image 03 Path",
+            "source": "generated from backend"
+          }
+        ],
+        "actions": [
+          {
+            "type": "action",
+            "name": "generateImages",
+            "label": "Generate Images",
+            "backendAction": "/workflows/mvp-car-step03-generateimages.json",
+            "method": "POST",
+            "expectedResponse": {
+              "status": "success",
+              "data": {
+                "image01path": "Path to generated image 01",
+                "image02path": "Path to generated image 02",
+                "image03path": "Path to generated image 03"
+              }
+            }
+          },
+          {
+            "type": "action",
+            "name": "chooseFromLibrary",
+            "label": "Choose Images from Library",
+            "backendAction": "/image-library",
+            "method": "GET",
+            "expectedResponse": {
+              "status": "success",
+              "data": {
+                "image01path": "Selected image 01 from library",
+                "image02path": "Selected image 02 from library",
+                "image03path": "Selected image 03 from library"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Step 4: Finalize Post",
+        "description": "Finalize and create the post by modifying texts or regenerating images.",
+        "instructions": "Make any final modifications to the texts or regenerate the images before creating the post.",
+        "inputs": [
+          {
+            "type": "textarea",
+            "name": "title",
+            "label": "Title",
+            "source": "step2.outputs.title"
+          },
+          {
+            "type": "textarea",
+            "name": "subtitle",
+            "label": "Subtitle",
+            "source": "step2.outputs.subtitle"
+          },
+          {
+            "type": "textarea",
+            "name": "text01",
+            "label": "Text 01",
+            "source": "step2.outputs.text01"
+          },
+          {
+            "type": "textarea",
+            "name": "text02",
+            "label": "Text 02",
+            "source": "step2.outputs.text02"
+          },
+          {
+            "type": "textarea",
+            "name": "text03",
+            "label": "Text 03",
+            "source": "step2.outputs.text03"
+          },
+          {
+            "type": "textarea",
+            "name": "callToAction",
+            "label": "Call to Action",
+            "source": "step2.outputs.callToAction"
+          },
+          {
+            "type": "textarea",
+            "name": "postCaption",
+            "label": "Post Caption",
+            "source": "step2.outputs.postCaption"
+          },
+          {
+            "type": "textarea",
+            "name": "imageDescription01",
+            "label": "Image Description 01",
+            "source": "step2.outputs.imageDescription01"
+          },
+          {
+            "type": "textarea",
+            "name": "imageDescription02",
+            "label": "Image Description 02",
+            "source": "step2.outputs.imageDescription02"
+          },
+          {
+            "type": "textarea",
+            "name": "imageDescription03",
+            "label": "Image Description 03",
+            "source": "step2.outputs.imageDescription03"
+          }
+        ],
+        "outputs": [
+          {
+            "type": "image",
+            "name": "postimg01",
+            "label": "Post Image 01",
+            "source": "generated from backend"
+          },
+          {
+            "type": "image",
+            "name": "postimg02",
+            "label": "Post Image 02",
+            "source": "generated from backend"
+          },
+          {
+            "type": "image",
+            "name": "postimg03",
+            "label": "Post Image 03",
+            "source": "generated from backend"
+          },
+          {
+            "type": "image",
+            "name": "postimg04",
+            "label": "Post Image 04",
+            "source": "generated from backend"
+          },
+          {
+            "type": "image",
+            "name": "postimg05",
+            "label": "Post Image 05",
+            "source": "generated from backend"
+          },
+          {
+            "type": "textarea",
+            "name": "postCaption",
+            "label": "Final Post Caption",
+            "source": "generated from backend"
+          }
+        ],
+        "actions": [
+          {
+            "type": "action",
+            "name": "createPost",
+            "label": "Create Post",
+            "backendAction": "/workflows/mvp-car-step04-generatecarousel.json",
+            "method": "POST",
+            "expectedResponse": {
+              "status": "success",
+              "data": {
+                "postimg01": "Generated image 01 for carousel",
+                "postimg02": "Generated image 02 for carousel",
+                "postimg03": "Generated image 03 for carousel",
+                "postimg04": "Generated image 04 for carousel",
+                "postimg05": "Generated image 05 for carousel",
+                "postCaption": "Final post caption"
+              }
+            }
+          },
+          {
+            "type": "action",
+            "name": "modifyTexts",
+            "label": "Modify Texts",
+            "backendAction": "/workflows/mvp-car-step02-generatetexts.json",
+            "method": "POST"
+          },
+          {
+            "type": "action",
+            "name": "regenerateImages",
+            "label": "Regenerate Images",
+            "backendAction": "/workflows/mvp-car-step03-generateimages.json",
+            "method": "POST"
+          }
+        ]
+      }
+    ]
+  }
+  

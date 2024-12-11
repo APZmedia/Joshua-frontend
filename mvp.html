@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MVP User Journey</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-4">
+
+  <!-- Screen A: Input News and Link -->
+  <section id="screen-a" class="mb-8">
+    <h1 class="text-2xl font-bold mb-4">Task A: Analyze News</h1>
+    <div class="bg-white p-6 rounded shadow-md">
+      <label for="news-input" class="block text-lg font-medium mb-2">Input News</label>
+      <textarea id="news-input" rows="6" class="w-full p-2 border border-gray-300 rounded mb-4"></textarea>
+
+      <label for="link-input" class="block text-lg font-medium mb-2">Input Link</label>
+      <input id="link-input" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" />
+
+      <button class="bg-blue-500 text-white px-4 py-2 rounded">Analyze</button>
+    </div>
+  </section>
+
+  <!-- Screen B: Edit Output Text -->
+  <section id="screen-b" class="mb-8 hidden">
+    <h1 class="text-2xl font-bold mb-4">Task B: Edit Output Text</h1>
+    <div class="bg-white p-6 rounded shadow-md">
+      <label for="output-text" class="block text-lg font-medium mb-2">Output Text</label>
+      <textarea id="output-text" rows="6" class="w-full p-2 border border-gray-300 rounded mb-4"></textarea>
+
+      <button class="bg-green-500 text-white px-4 py-2 rounded">Generate Copy</button>
+    </div>
+  </section>
+
+  <!-- Screen C: Edit and Generate Images -->
+  <section id="screen-c" class="mb-8 hidden">
+    <h1 class="text-2xl font-bold mb-4">Task C: Generate and Edit Outputs</h1>
+    <div class="bg-white p-6 rounded shadow-md">
+      <label for="title" class="block text-lg font-medium mb-2">Title</label>
+      <input id="title" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" />
+
+      <label for="subtitle" class="block text-lg font-medium mb-2">Subtitle</label>
+      <input id="subtitle" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" />
+
+      <label for="text1" class="block text-lg font-medium mb-2">Text 1</label>
+      <input id="text1" type="text" class="w-full p-2 border border-gray-300 rounded mb-4" />
+
+      <!-- More text inputs for Text2, Text3, Image Descriptions -->
+
+      <div class="flex gap-4 mb-4">
+        <button class="bg-yellow-500 text-white px-4 py-2 rounded">Edit Post</button>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded">Generate Images</button>
+        <button class="bg-gray-500 text-white px-4 py-2 rounded">Choose from Library</button>
+        <button class="bg-red-500 text-white px-4 py-2 rounded">Modify Descriptions</button>
+      </div>
+
+      <button class="bg-green-500 text-white px-4 py-2 rounded">Create Post</button>
+    </div>
+  </section>
+
+  <!-- Screen D: Display Generated Images -->
+  <section id="screen-d" class="hidden">
+    <h1 class="text-2xl font-bold mb-4">Task D: Display Generated Images</h1>
+    <div class="bg-white p-6 rounded shadow-md">
+      <div class="grid grid-cols-3 gap-4 mb-4">
+        <img src="postimg01.jpg" alt="Post Image 01" class="w-full rounded" />
+        <img src="postimg02.jpg" alt="Post Image 02" class="w-full rounded" />
+        <img src="postimg03.jpg" alt="Post Image 03" class="w-full rounded" />
+        <img src="postimg04.jpg" alt="Post Image 04" class="w-full rounded" />
+        <img src="postimg05.jpg" alt="Post Image 05" class="w-full rounded" />
+      </div>
+
+      <label for="caption" class="block text-lg font-medium mb-2">Caption</label>
+      <textarea id="caption" rows="4" class="w-full p-2 border border-gray-300 rounded mb-4"></textarea>
+
+      <button class="bg-blue-500 text-white px-4 py-2 rounded">Back to Edit</button>
+    </div>
+  </section>
+
+  <!-- Link to the external JS file -->
+  <script src="flow.js"></script>
+
+</body>
+</html>
